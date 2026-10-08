@@ -59,7 +59,7 @@ main { max-width: var(--content-width); margin: auto; padding: 0 var(--page-gutt
 .section-heading > p:not(.eyebrow), .split-section > div > p:not(.eyebrow) { color: var(--muted); max-width: 680px; }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 6px 10px; border-radius: 999px; color: var(--blue); background: #e6f4fb; font-size: .74rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); }
-.hero .eyebrow { padding: 0; background: none; }
+.hero .eyebrow { display: block; padding: 0; background: none; }
 .hero .eyebrow::before { display: none; }
 .fine-print { color: var(--muted); font-size: .82rem; }
 
@@ -169,7 +169,7 @@ tbody tr:hover { background: #edf8fd; }
 .site-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; min-height: 76px; border-bottom: 1px solid rgba(255,255,255,.18); }
 .site-bar .brand { min-height: 0; border: 0; color: #fff; text-decoration: none; }
 .site-nav { display: flex; gap: 4px; }
-.site-nav a { padding: 8px 14px; border-radius: 999px; color: #d7e7fb; font-size: .82rem; font-weight: 700; text-decoration: none; }
+.site-nav a { white-space: nowrap; padding: 8px 14px; border-radius: 999px; color: #d7e7fb; font-size: .82rem; font-weight: 700; text-decoration: none; }
 .site-nav a:hover { background: rgba(255,255,255,.1); }
 .site-nav a[aria-current="page"] { color: var(--navy); background: #fff; }
 .hero-copy a { color: var(--cyan-light); }
