@@ -1,0 +1,15 @@
+feature,feature_label,component,loading,explained_variance_ratio,absolute_loading
+npxg_per_match,Non-penalty xG per match,PC1,0.3907814263260236,0.8956187607706092,0.3907814263260236
+passes_completed_per_match,Completed passes per match,PC1,0.38944901049232006,0.8956187607706092,0.38944901049232006
+passes_into_final_third_per_match,Passes into final third per match,PC1,0.3869128766210289,0.8956187607706092,0.3869128766210289
+progressive_passes_per_match,Progressive passes per match,PC1,0.38485614590456074,0.8956187607706092,0.38485614590456074
+high_regains_per_match,High regains per match,PC1,0.37713142001455163,0.8956187607706092,0.37713142001455163
+xg_conceded_per_match,xG conceded per match,PC1,-0.3579796144985947,0.8956187607706092,0.3579796144985947
+npxg_per_shot,Non-penalty xG per shot,PC1,0.3569677934642357,0.8956187607706092,0.3569677934642357
+npxg_per_shot,Non-penalty xG per shot,PC2,0.6750284556055686,0.056156362204175095,0.6750284556055686
+high_regains_per_match,High regains per match,PC2,-0.464466171927491,0.056156362204175095,0.464466171927491
+progressive_passes_per_match,Progressive passes per match,PC2,0.3421562650608811,0.056156362204175095,0.3421562650608811
+passes_into_final_third_per_match,Passes into final third per match,PC2,-0.2969574373786921,0.056156362204175095,0.2969574373786921
+npxg_per_match,Non-penalty xG per match,PC2,-0.25163183490420865,0.056156362204175095,0.25163183490420865
+passes_completed_per_match,Completed passes per match,PC2,0.18650534988092385,0.056156362204175095,0.18650534988092385
+xg_conceded_per_match,xG conceded per match,PC2,0.15890344254101724,0.056156362204175095,0.15890344254101724

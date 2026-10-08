@@ -1,0 +1,21 @@
+feature,label,coefficient
+distance,Distance to goal,-0.6800844053860157
+angle,Goal angle,0.6374922965033746
+is_header,Header,-0.4208230533325079
+defenders_in_cone,Defenders between ball and goal,-0.38471715475918955
+is_direct_free_kick,Direct free kick,0.24880051127230768
+pressure_within_2y,Opponents within 2 yards,-0.22113914468592974
+gk_distance_to_goal,Goalkeeper distance from goal centre,0.20731862687672406
+gk_in_cone,Goalkeeper between ball and goal,-0.14545684316418822
+is_volley,Volley or half-volley,-0.13643210287125812
+one_on_one,One-on-one,0.1131635934655268
+is_lob,Lob,0.10215328678493822
+first_time,First-time shot,-0.08820933497371261
+open_goal,Open goal,0.06231935159719876
+from_through_ball,Assisted by a through ball,0.05922158809516316
+from_transition,From a counter-attack,0.04518374225966415
+is_other_body_part,Other body part,0.02259589176996231
+from_cross,Assisted by a cross,-0.01840407640129929
+from_cutback,Assisted by a cutback,0.017319539661459587
+from_set_piece,From a set piece,-0.006496079770900312
+under_pressure,Under pressure,-0.0011249343415946824

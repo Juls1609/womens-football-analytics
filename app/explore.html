@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore every team, shot and player from Liga F 2023/24: chance creation, a Liga F xG model, expected threat and player similarity." />
+    <title>Explore the data · Liga F 2023/24 | Julieta Schwartz Cerveny</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://juls1609.github.io/womens-football-analytics/explore.html" />
+    <meta property="og:title" content="Liga F 2023/24 — explore the data" />
+    <meta property="og:description" content="Every team, shot and player from Liga F 2023/24: chance creation, a Liga F xG model, expected threat and player similarity." />
+    <meta property="og:image" content="https://juls1609.github.io/womens-football-analytics/assets/social-card.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=5" />
+  </head>
+  <body>
+    <header class="hero hero--compact">
+      <div class="hero-inner">
+        <div class="site-bar">
+          <a class="brand" href="index.html">JSC <span>Football Analytics</span></a>
+          <nav class="site-nav" aria-label="Site">
+            <a href="index.html">The analysis</a>
+            <a href="explore.html" aria-current="page">Explore the data</a>
+          </nav>
+        </div>
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">StatsBomb Open Data · Liga F 2023/24</p>
+            <h1>Explore the data</h1>
+            <p class="hero-copy">Every team, shot and player from all 240 matches of the season. For the argument these numbers make, <a href="index.html">read the analysis</a>.</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tab-bar" aria-label="Analysis sections">
+      <div class="tab-strip" role="tablist">
+        <button class="tab-trigger" role="tab" id="tab-overview" aria-controls="panel-overview" data-tab="overview">Overview</button>
+        <button class="tab-trigger" role="tab" id="tab-attacking" aria-controls="panel-attacking" data-tab="attacking">Attacking</button>
+        <button class="tab-trigger" role="tab" id="tab-finishing" aria-controls="panel-finishing" data-tab="finishing">Finishing &amp; xG</button>
+        <button class="tab-trigger" role="tab" id="tab-styles" aria-controls="panel-styles" data-tab="styles">Styles</button>
+        <button class="tab-trigger" role="tab" id="tab-passing" aria-controls="panel-passing" data-tab="passing">Passing</button>
+        <button class="tab-trigger" role="tab" id="tab-defending" aria-controls="panel-defending" data-tab="defending">Defending</button>
+        <button class="tab-trigger" role="tab" id="tab-creators" aria-controls="panel-creators" data-tab="creators">Creators</button>
+        <button class="tab-trigger" role="tab" id="tab-players" aria-controls="panel-players" data-tab="players">Similar players</button>
+        <button class="tab-trigger" role="tab" id="tab-method" aria-controls="panel-method" data-tab="method">Method</button>
+      </div>
+    </nav>
+
+    <main>
+      <div class="tab-panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" data-tab-panel="overview">
+        <section class="kpi-grid" aria-label="Season overview">
+          <article><span>Matches</span><strong id="matches-kpi">—</strong><small>Complete season</small></article>
+          <article><span>Shots</span><strong id="shots-kpi">—</strong><small id="shots-kpi-note">—</small></article>
+          <article><span>Non-penalty xG</span><strong id="xg-kpi">—</strong><small id="xg-kpi-note">—</small></article>
+          <article><span>Goals</span><strong id="goals-kpi">—</strong><small id="goals-kpi-note">—</small></article>
+        </section>
+
+        <section class="panel-section">
+          <div class="section-heading">
+            <p class="eyebrow">01 · Volume and quality</p>
+            <h2>Volume and chance quality are not the same thing.</h2>
+            <p>Each crest shows how often a team shot and how good those shots were on average. The dashed lines mark the league average, so the top-right corner holds teams that shot more often <em>and</em> from better positions.</p>
+            <p id="research-answer" class="research-answer"></p>
+          </div>
+          <div class="chart-card"><div id="team-scatter" class="chart" role="img" aria-label="Shots per match against non-penalty xG per shot for each team"></div></div>
+        </section>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="panel-attacking" aria-labelledby="tab-attacking" data-tab-panel="attacking" hidden>
+        <section class="split-section">
+          <div>
+            <p class="eyebrow">02 · Attacking profiles</p>
+            <h2>Where do teams' chances come from?</h2>
+            <p>Every shot gets one label. Set pieces come first, then counter-attacks, then the type of final pass. Bars show the selected team's mix and the line shows the league average.</p>
+            <label class="select-label" for="team-select">Team</label>
+            <select id="team-select"></select>
+            <div id="team-summary" class="team-summary" aria-live="polite"></div>
+          </div>
+          <div class="chart-card"><div id="profile-chart" class="chart" role="img" aria-label="Share of shots by chance category for the selected team and the league"></div></div>
+        </section>
+
+        <section class="split-section">
+          <div>
+            <p class="eyebrow">03 · Shot locations</p>
+            <h2>Explore the shot locations.</h2>
+            <p>Each point is a shot, attacking left to right. Point size is the shot's xG, and gold points are goals.</p>
+            <label class="select-label" for="shot-team-select">Team</label>
+            <select id="shot-team-select"><option value="All">All teams</option></select>
+            <label class="select-label" for="shot-category-select">Chance type</label>
+            <select id="shot-category-select"><option value="All">All chance types</option></select>
+            <p id="shot-summary" class="shot-summary" aria-live="polite"></p>
+          </div>
+          <div class="chart-card pitch-card"><div id="shot-map" class="chart" role="img" aria-label="Shot map"></div></div>
+        </section>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="panel-finishing" aria-labelledby="tab-finishing" data-tab-panel="finishing" hidden>
+        <section class="panel-section">
+          <div class="section-heading">
+            <p class="eyebrow">04 · The xG gap</p>
+            <h2>Liga F scores more than xG expects.</h2>
+            <p id="finishing-summary" class="research-answer"></p>
+          </div>
+          <div class="controls controls--light">
+            <div>
+              <label for="gap-dimension">Break the gap down by</label>
+              <select id="gap-dimension">
+                <option value="Freeze frame">What stood between ball and goal</option>
+                <option value="Distance">Shot distance</option>
+                <option value="Chance type">Chance type</option>
+                <option value="Body part">Body part</option>
+              </select>
+            </div>
+          </div>
+          <p class="fine-print">Bars to the right of the line mean more goals than StatsBomb's xG expected. Dark bars are gaps too large to be chance (z ≥ 2).</p>
+          <div class="chart-card"><div id="gap-chart" class="chart chart--short" role="img" aria-label="Goals per StatsBomb xG by shot context"></div></div>
+        </section>
+
+        <section class="split-section">
+          <div>
+            <p class="eyebrow">05 · A Liga F xG model</p>
+            <h2>Is StatsBomb's model wrong, or just mis-scaled?</h2>
+            <p>I trained an xG model on this season's shots, using location, body part, technique, assist type and freeze-frame features such as how many defenders blocked the goal. Every model is scored only on matches it never saw. The chart compares predicted and actual scoring rates; a perfectly calibrated model sits on the dotted line.</p>
+            <p id="model-verdict" class="research-answer"></p>
+          </div>
+          <div class="chart-card"><div id="calibration-chart" class="chart" role="img" aria-label="Calibration of the xG models"></div></div>
+        </section>
+
+        <section class="panel-section">
+          <div class="table-wrap table-wrap--light">
+            <table>
+              <caption class="table-caption">Out-of-sample performance on non-penalty shots (5-fold, grouped by match)</caption>
+              <thead><tr><th scope="col">Model</th><th scope="col">ROC AUC ↑</th><th scope="col">Log loss ↓</th><th scope="col">Skill vs league average ↑</th><th scope="col">Predicted / actual goals</th></tr></thead>
+              <tbody id="model-table"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="split-section">
+          <div>
+            <p class="eyebrow">06 · What makes a shot go in</p>
+            <h2>What drives the Liga F model?</h2>
+            <p>These are standardised effects from the logistic version of the model. Blue features raise the chance of scoring and red ones lower it, holding everything else constant. Distance and angle dominate, as in any xG model, but the freeze-frame features add real information: the number of defenders in the shooting lane matters almost as much as whether the shot is a header.</p>
+          </div>
+          <div class="chart-card"><div id="feature-chart" class="chart" role="img" aria-label="Effects of each feature in the Liga F xG model"></div></div>
+        </section>
+
+        <section class="panel-section">
+          <div class="section-heading">
+            <p class="eyebrow">07 · Who really finished well?</p>
+            <h2>Most "overperformance" was the league, not the team.</h2>
+            <p>Red circles compare each team's goals with StatsBomb xG and blue diamonds with the Liga F model. Once xG is calibrated to the league, most teams' apparent finishing edge shrinks towards zero.</p>
+          </div>
+          <div class="chart-card"><div id="team-finishing-chart" class="chart" role="img" aria-label="Team goals minus expected goals under both models"></div></div>
+          <div class="table-grid">
+            <div class="table-wrap table-wrap--light">
+              <table>
+                <caption class="table-caption">Finishers: goals above Liga F xG (minimum 30 non-penalty shots)</caption>
+                <thead><tr><th scope="col">Player</th><th scope="col">Shots</th><th scope="col">Goals</th><th scope="col">Liga F xG</th><th scope="col">Difference</th></tr></thead>
+                <tbody id="shooter-table"></tbody>
+              </table>
+            </div>
+            <div class="table-wrap table-wrap--light">
+              <table>
+                <caption class="table-caption">Goalkeepers: goals conceded vs Liga F xG faced (minimum 60 shots)</caption>
+                <thead><tr><th scope="col">Goalkeeper</th><th scope="col">Shots</th><th scope="col">Goals</th><th scope="col">Liga F xG</th><th scope="col">Difference</th></tr></thead>
+                <tbody id="keeper-table"></tbody>
+              </table>
+            </div>
+          </div>
+          <p class="fine-print">Goalkeeper figures use pre-shot xG, so they reflect both shot-stopping and the quality of shots on target faced. Post-shot xG is not in the open data.</p>
+        </section>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="panel-styles" aria-labelledby="tab-styles" data-tab-panel="styles" hidden>
+        <section class="panel-section">
+          <div class="section-heading">
+            <p class="eyebrow">08 · Team styles</p>
+            <h2>Which teams look similar?</h2>
+            <p>Principal component analysis (PCA) condenses seven standardised attacking, progression and defensive measures into a two-dimensional map. Colours are K-means groups fitted on the same seven measures. They describe similar profiles, not fixed tactical labels.</p>
+          </div>
+          <div class="pca-model-tabs" role="group" aria-label="PCA model">
+            <button class="pca-model-trigger active" type="button" aria-pressed="true" data-pca-model="all_teams">All 16 teams</button>
+            <button class="pca-model-trigger" type="button" aria-pressed="false" data-pca-model="without_excluded_team">Without Barcelona</button>
+          </div>
+          <p id="pca-model-status" class="pca-model-status"></p>
+          <div class="chart-card"><div id="styles-chart" class="chart" role="img" aria-label="PCA map of team profiles"></div></div>
+
+          <section class="pca-reading" aria-labelledby="pca-reading-title">
+            <div>
+              <p class="eyebrow">How to read the map</p>
+              <h3 id="pca-reading-title">What the two axes measure.</h3>
+              <p id="pca-summary" class="pca-summary"></p>
+              <p id="pca-influence" class="pca-influence"></p>
+              <p class="fine-print">All seven measures are standardised before fitting, so a high-volume measure such as completed passes cannot dominate just because of its scale. Axis directions are fixed so that moving right always means more points per match.</p>
+            </div>
+            <div id="pca-component-cards" class="pca-component-cards" aria-live="polite"></div>
+          </section>
+
+          <section class="cluster-reading" aria-labelledby="cluster-reading-title">
+            <div class="cluster-heading">
+              <p class="eyebrow">What the colours mean</p>
+              <h3 id="cluster-reading-title">The groups are performance levels, not attacking identities.</h3>
+              <p id="cluster-intro"></p>
+            </div>
+            <div id="cluster-profiles" class="cluster-profiles" aria-live="polite"></div>
+          </section>
+        </section>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="panel-passing" aria-labelledby="tab-passing" data-tab-panel="passing" hidden>
+        <section class="panel-section">
+          <div class="section-heading">
+            <p class="eyebrow">09 · Passing style</p>
+            <h2>Progression is more than possession.</h2>
+            <p>This compares completed passing volume with open-play progressive passes, meaning completed passes that move the ball at least 10 yards closer to the opponent's goal. Restarts such as goal kicks are excluded from progression.</p>
+          </div>
+          <div class="chart-card"><div id="passing-chart" class="chart" role="img" aria-label="Completed passes against progressive passes per match"></div></div>
+        </section>
+        <section class="split-section">
+          <div>
+            <p class="eyebrow">10 · Passing network</p>
+            <h2>Who connects with whom?</h2>
+            <p>This shows each team's eleven most frequent starters across the season. Dots sit at each player's average position when passing or receiving, and lines show pairs who completed at least ten passes to each other. Thicker lines mean more passes.</p>
+            <label class="select-label" for="network-team-select">Team</label>
+            <select id="network-team-select"></select>
+          </div>
+          <div class="chart-card pitch-card"><div id="network-chart" class="chart" role="img" aria-label="Team passing network"></div></div>
+        </section>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="panel-defending" aria-labelledby="tab-defending" data-tab-panel="defending" hidden>
+        <section class="panel-section">
+          <div class="section-heading">
+            <p class="eyebrow">11 · Defensive context</p>
+            <h2>What do teams allow, and where do they win the ball back?</h2>
+            <p>High regains are successful ball recoveries and interceptions in the attacking third. Lower xG conceded means a team allowed fewer and worse chances. The best defensive profiles sit in the bottom right.</p>
+          </div>
+          <div class="chart-card"><div id="defending-chart" class="chart" role="img" aria-label="High regains against xG conceded per match"></div></div>
+        </section>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="panel-creators" aria-labelledby="tab-creators" data-tab-panel="creators" hidden>
+        <section class="panel-section creators">
+          <div class="section-heading">
+            <p class="eyebrow">12 · Chance creators</p>
+            <h2>The final pass: quality and outcome.</h2>
+            <p><strong>Derived xA</strong> adds up the non-penalty xG of every shot a player set up directly. Goal assists show what actually happened after those passes.</p>
+          </div>
+          <div class="controls">
+            <div>
+              <label for="creator-team">Team</label>
+              <select id="creator-team"><option value="All">All teams</option></select>
+            </div>
+            <div class="segmented" role="group" aria-label="Ranking">
+              <button type="button" class="segment active" aria-pressed="true" data-creator-mode="xa90">xA per 90</button>
+              <button type="button" class="segment" aria-pressed="false" data-creator-mode="xt90">xT per 90</button>
+              <button type="button" class="segment" aria-pressed="false" data-creator-mode="total">xA season total</button>
+            </div>
+          </div>
+          <p id="creator-note" class="fine-print"></p>
+          <div class="chart-card"><div id="creator-chart" class="chart" role="img" aria-label="Leading chance creators"></div></div>
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">Leading chance creators</caption>
+              <thead><tr><th scope="col">Player</th><th scope="col">Team</th><th scope="col">Minutes</th><th scope="col">Created shots</th><th scope="col">Derived xA</th><th scope="col">xA per 90</th><th scope="col">xT per 90</th><th scope="col">Goal assists</th></tr></thead>
+              <tbody id="creator-table"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="split-section">
+          <div>
+            <p class="eyebrow">13 · Expected threat</p>
+            <h2>Every pass and carry counts.</h2>
+            <p>Derived xA only rewards the last pass before a shot. Expected threat (xT) values every area of the pitch by how likely possession there is to become a goal, so any completed pass or carry that moves the ball somewhere more dangerous earns credit. The map shows those values, fitted on this season's open play.</p>
+          </div>
+          <div class="chart-card pitch-card"><div id="xt-grid-chart" class="chart" role="img" aria-label="Expected threat by pitch area"></div></div>
+        </section>
+        <section class="panel-section">
+          <div class="section-heading">
+            <p class="eyebrow">14 · Hidden creators</p>
+            <h2>The players assists can't see.</h2>
+            <p id="threat-summary"></p>
+          </div>
+          <div class="chart-card"><div id="threat-scatter" class="chart" role="img" aria-label="xT per 90 against derived xA per 90 for each player"></div></div>
+          <ul id="threat-hidden-list" class="player-chips"></ul>
+        </section>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="panel-players" aria-labelledby="tab-players" data-tab-panel="players" hidden>
+        <section class="panel-section">
+          <div class="section-heading">
+            <p class="eyebrow">15 · Similar players</p>
+            <h2>Find players with a similar statistical profile.</h2>
+            <p>Pick an outfield player with at least 600 minutes. Similarity compares twelve per-90 measures covering shooting, creating, progressing and defending, after putting each on the same scale. It describes statistical output, not quality or playing style.</p>
+          </div>
+          <div class="similarity-controls">
+            <div>
+              <label class="select-label" for="player-search">Player</label>
+              <input id="player-search" list="player-options" class="text-input" autocomplete="off" spellcheck="false" />
+              <datalist id="player-options"></datalist>
+            </div>
+            <label class="checkbox"><input type="checkbox" id="same-position" checked /> Same position group only</label>
+          </div>
+          <p id="similar-message" class="fine-print" role="status"></p>
+          <div class="similarity-layout">
+            <div>
+              <div id="similar-target" class="similar-target"></div>
+              <ol id="similar-list" class="similar-list"></ol>
+            </div>
+            <div class="chart-card"><div id="similarity-chart" class="chart chart--tall" role="img" aria-label="Percentile comparison of the selected players"></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="tab-panel" role="tabpanel" id="panel-method" aria-labelledby="tab-method" data-tab-panel="method" hidden>
+        <section class="method-section">
+          <div>
+            <p class="eyebrow">Methodology</p>
+            <h2>Transparent measures before complex modelling.</h2>
+            <p class="method-intro">Every number on this page comes from one reproducible Python pipeline. The pipeline stops if goals, shots or minutes fail to reconcile with the match records.</p>
+          </div>
+          <div id="method-grid" class="method-grid"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <span>Julieta Schwartz Cerveny · Football Data Scientist</span>
+      <a class="data-credit" href="https://github.com/statsbomb/open-data" aria-label="Data provided by StatsBomb"><span>Data by</span><img src="assets/statsbomb-logo.png" alt="StatsBomb" width="118" height="19" /></a>
+      <span><a href="https://github.com/Juls1609/womens-football-analytics">Code on GitHub</a> · Data: <a href="https://github.com/statsbomb/open-data">StatsBomb Open Data</a> · Club crests remain the property of their respective owners.</span>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/d3-dsv@3/dist/d3-dsv.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script type="module" src="js/explore.js?v=5"></script>
+  </body>
+</html>

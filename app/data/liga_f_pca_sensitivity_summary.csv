@@ -1,0 +1,3 @@
+model,excluded_team,teams_included,pc1_explained_variance_ratio,pc2_explained_variance_ratio,two_component_variance_ratio,kmeans_silhouette,pc1_points_correlation
+all_teams,,16,0.8956187607706092,0.056156362204175095,0.9517751229747843,0.405563974240325,0.945304577703594
+without_excluded_team,Barcelona WFC,15,0.8654216602100896,0.06464034083475315,0.9300620010448427,0.4131668130361575,0.9352411260455363

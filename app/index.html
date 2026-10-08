@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A data analysis of Liga F 2023/24: the best teams create more and better chances rather than different ones, xG undersells the league's scoring, and expected threat reveals the creators assists miss." />
+    <title>More, better and underrated: Liga F 2023/24 in data | Julieta Schwartz Cerveny</title>
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://juls1609.github.io/womens-football-analytics/" />
+    <meta property="og:title" content="More, better and underrated: Liga F 2023/24 in data" />
+    <meta property="og:description" content="The best teams don't create differently, xG undersells the league by 15%, and expected threat finds the creators assists miss." />
+    <meta property="og:image" content="https://juls1609.github.io/womens-football-analytics/assets/social-card.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=5" />
+  </head>
+  <body class="story-page">
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="site-bar">
+          <a class="brand" href="index.html">JSC <span>Football Analytics</span></a>
+          <nav class="site-nav" aria-label="Site">
+            <a href="index.html" aria-current="page">The analysis</a>
+            <a href="explore.html">Explore the data</a>
+          </nav>
+        </div>
+        <div class="story-hero">
+          <p class="eyebrow">Liga F 2023/24 · <span data-stat="matches">240</span> matches · <span data-stat="shots">6,166</span> shots</p>
+          <h1>More, better and underrated.</h1>
+          <p class="hero-copy">What a full season of event data says about how Liga F teams create chances: why the best teams don't play differently, why the standard xG model undersells the league, and which players create chances that assist numbers miss.</p>
+          <p class="byline">By Julieta Schwartz Cerveny · Football Data Scientist · 7 min read</p>
+          <div class="hero-actions">
+            <a class="button button--primary" href="#findings">Read the findings</a>
+            <a class="button" href="explore.html">Explore the data</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="story">
+      <section id="findings" class="findings" aria-label="Key findings">
+        <article>
+          <span class="finding-number">01</span>
+          <strong><span data-stat="volumeGap">58%</span> more shots, <span data-stat="qualityGap">33%</span> better ones</strong>
+          <p>The top four out-created everyone, but through the same kinds of chances as everyone else.</p>
+        </article>
+        <article>
+          <span class="finding-number">02</span>
+          <strong><span data-stat="gap">+89</span> goals above xG</strong>
+          <p>Not luck (z = <span data-stat="gapZ">4.2</span>). StatsBomb's model ranks chances well but sets their level too low for this league.</p>
+        </article>
+        <article>
+          <span class="finding-number">03</span>
+          <strong><span data-stat="example1Xt">25th</span> for threat, <span data-stat="example1Xa">173rd</span> for assists</strong>
+          <p><span data-stat="example1">Martina Fernández</span> leads a group of players whose creativity happens before the final pass.</p>
+        </article>
+      </section>
+
+      <article class="story-body">
+        <section>
+          <p class="eyebrow">1 · How the best teams attack</p>
+          <h2>The best teams don't create differently. They create more, and better.</h2>
+          <p>Over the season, Liga F's top four took <strong data-stat="volumeGap">58%</strong> more non-penalty shots per match than the other twelve teams, and each of those shots was worth <strong data-stat="qualityGap">33%</strong> more expected goals (xG). Yet their mix of chances (set pieces, crosses, cutbacks, through balls, counter-attacks) was almost the same as everyone else's: no category differed by more than <span data-stat="mixMax">4.5</span> percentage points.</p>
+          <figure class="story-figure">
+            <div class="chart-card"><div id="story-volume" class="chart" role="img" aria-label="Shots per match against xG per shot for each team"></div></div>
+            <figcaption>Each crest is a team. Up means better chances and right means more of them; the dotted lines are the league average.</figcaption>
+          </figure>
+          <p>The pattern holds well beyond the top four. Combining seven measures of attack, progression and defence in a principal component analysis, a single axis explains <strong data-stat="pc1">89.6%</strong> of the differences between teams, and it tracks points per match almost perfectly (r = <span data-stat="pc1Correlation">0.95</span>). Take out <span data-stat="excludedTeam">Barcelona</span>'s dominant season and that axis still explains <span data-stat="pc1WithoutLeader">86.5%</span>.</p>
+          <p class="pull-quote">Liga F doesn't have competing styles so much as a ladder of control. Teams differ in how much they dominate, not in how.</p>
+          <p><a class="text-link" href="explore.html#styles">Explore the team-style map →</a></p>
+        </section>
+
+        <section>
+          <p class="eyebrow">2 · Finishing and expected goals</p>
+          <h2>Liga F outscores its xG, and it isn't luck.</h2>
+          <p>Expected goals is the standard yardstick for chance quality, and StatsBomb's model is among the best available. Yet across the season, Liga F scored <strong data-stat="npGoals">701</strong> non-penalty goals from <strong data-stat="npXg">612.2</strong> xG. That's <span data-stat="gap">+89</span> goals, or <span data-stat="gapPct">15%</span> more than expected. If the xG values were right, a gap that large <span data-stat="gapChance">would happen by chance less than once in ten thousand seasons</span> (z = <span data-stat="gapZ">4.2</span>).</p>
+          <p>The gap isn't spread evenly. StatsBomb's freeze frames record where every player stood at the moment of each shot, and they show that almost all of it comes from shots with a clear sight of goal: <strong data-stat="gapOpen">+86</strong> goals when no defender stood between ball and goal, against just <strong data-stat="gapBlocked">+3</strong> when one did.</p>
+          <figure class="story-figure">
+            <div class="chart-card"><div id="story-gap" class="chart chart--short" role="img" aria-label="Goals per StatsBomb xG by shot context"></div></div>
+            <figcaption>Goals scored per unit of StatsBomb xG. A value of 1 means exactly as expected, and dark bars are gaps too large to be chance.</figcaption>
+          </figure>
+          <p>So is the model wrong? To find out, I trained an xG model on Liga F's own shots, using shot location, body part, technique, assist type and the freeze-frame features, and I scored every model only on matches it hadn't seen. The answer is more interesting than "my model wins". StatsBomb's model still <em>ranks</em> chances better (AUC <span data-stat="aucStatsbomb">0.816</span> against <span data-stat="aucOurs">0.810</span>). What it gets wrong is the <em>level</em>: it expects <span data-stat="predictedStatsbomb">612</span> goals where <span data-stat="actualGoals">701</span> were scored. Re-fitting just its level and slope to Liga F predicts <span data-stat="predictedRecalibrated">701</span><span data-stat="recalibratedVerdict"> and gives the best-scoring model of the four I tested</span>.</p>
+          <figure class="story-figure">
+            <div class="chart-card"><div id="story-calibration" class="chart" role="img" aria-label="Calibration of StatsBomb xG before and after recalibration"></div></div>
+            <figcaption>Predicted chance of scoring against how often shots were actually scored. Raw StatsBomb xG (red) sits above the dotted line across most of its range, meaning shots went in more often than it predicted. Recalibrated (blue) sits on the line.</figcaption>
+          </figure>
+          <p>This matters for anyone judging finishing. Against raw StatsBomb xG, <span data-stat="leaderTeam">Barcelona</span> outscored expectations by <span data-stat="leaderGapStatsbomb">+26</span> goals, which looks like elite finishing. Against the Liga F model, the edge is <span data-stat="leaderGapOurs">+6</span>, and the apparent over- or under-performance shrinks for <span data-stat="shrinkingTeams">13 of 16</span> teams. Much of what looks like great finishing in this league is the league itself. Players who still stand out after calibration are worth a closer look: <span data-stat="finisher">Salma Paralluelo</span> scored <span data-stat="finisherGoals">20</span> non-penalty goals from <span data-stat="finisherXg">13.2</span> Liga F xG.</p>
+          <p>Why does the gap exist? This data can't say for certain. Concentrated as it is on shots where only the goalkeeper stands in the way, it is consistent with differences in goalkeeping, finishing, or both, compared with the mix of football the model was calibrated on. Telling those apart needs post-shot data that isn't in the open release.</p>
+          <p><a class="text-link" href="explore.html#finishing">See the full model comparison →</a></p>
+        </section>
+
+        <section>
+          <p class="eyebrow">3 · Chance creation beyond the assist</p>
+          <h2>The creators assists can't see.</h2>
+          <p>Assists and xA only reward the last pass before a shot. But much of the work of creating a chance happens earlier: the pass that breaks a line, or the carry that pulls a defence out of shape. Expected threat (xT) values every area of the pitch by how likely possession there is to become a goal, then credits each completed pass and carry with the threat it adds.</p>
+          <p>Across <span data-stat="eligiblePlayers">255</span> outfield players with at least 600 minutes, xT and xA per 90 correlate at r = <span data-stat="xtCorrelation">0.78</span>: related, but not the same thing. <strong data-stat="hiddenCount">8</strong> players rank in the top 25 for xT but outside the top 40 for xA. The most striking is <strong data-stat="example1">Martina Fernández</strong> (<span data-stat="example1Team">Barcelona</span>), a <span data-stat="example1Group">defender</span> who ranks <span data-stat="example1Xt">25th</span> in the league for xT but <span data-stat="example1Xa">173rd</span> for xA. Away from <span data-stat="example1Team">Barcelona</span>, <span data-stat="example2">Ane Elexpuru Añorga</span> (<span data-stat="example2Team">Athletic Club Bilbao</span>, <span data-stat="example2Group">defender</span>) is <span data-stat="example2Xt">24th</span> for xT and <span data-stat="example2Xa">94th</span> for xA.</p>
+          <figure class="story-figure">
+            <div class="chart-card"><div id="story-threat" class="chart chart--tall" role="img" aria-label="Expected threat per 90 against derived xA per 90"></div></div>
+            <figcaption>Each dot is a player with 600+ minutes. Gold players rank in the top 25 for threat but outside the top 40 for assists:</figcaption>
+            <ul id="story-hidden-list" class="player-chips"></ul>
+          </figure>
+          <p>Some of them create almost entirely with the ball at their feet: <span data-stat="carrier">Linda Caicedo</span> earned <span data-stat="carrierShare">71%</span> of her xT from carries, which no passing metric can see. One caution: xT rewards having the ball, so players on dominant teams get more chances to earn it. It is best used to compare players within similar teams.</p>
+          <p><a class="text-link" href="explore.html#players">Find players with a similar profile to anyone in the league →</a></p>
+        </section>
+
+        <section>
+          <p class="eyebrow">4 · So what?</p>
+          <h2>What this means</h2>
+          <ul class="takeaways">
+            <li><strong>For analysts:</strong> calibrate xG to the league before judging finishing. In Liga F 2023/24, raw xG understated scoring by <span data-stat="gapPct">15%</span>, enough to make most teams look like good finishers.</li>
+            <li><strong>For recruitment:</strong> pair final-pass metrics with xT. A shortlist built on assists alone misses the defenders and midfielders who progress the ball.</li>
+            <li><strong>For tactics:</strong> at the top of Liga F, the edge was the volume and quality of chances, not a distinctive route to goal.</li>
+          </ul>
+        </section>
+
+        <section class="about">
+          <h2>About this analysis</h2>
+          <p>Built from StatsBomb's open event data for all <span data-stat="matches">240</span> matches of Liga F 2023/24, using Python (pandas, scikit-learn) and Plotly. The pipeline reconciles goals, shots and player minutes with official match records and stops if they don't match. Every definition, including the chance categories, the xG model, expected threat and player similarity, is documented in the <a href="https://github.com/Juls1609/womens-football-analytics/blob/main/METHODOLOGY.md">methodology</a>, and all the code is <a href="https://github.com/Juls1609/womens-football-analytics">on GitHub</a>.</p>
+          <div class="hero-actions">
+            <a class="button button--primary" href="explore.html">Explore the data</a>
+            <a class="button" href="https://github.com/Juls1609/womens-football-analytics">View the code</a>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <span>Julieta Schwartz Cerveny · Football Data Scientist</span>
+      <a class="data-credit" href="https://github.com/statsbomb/open-data" aria-label="Data provided by StatsBomb"><span>Data by</span><img src="assets/statsbomb-logo.png" alt="StatsBomb" width="118" height="19" /></a>
+      <span><a href="https://github.com/Juls1609/womens-football-analytics">Code on GitHub</a> · Data: <a href="https://github.com/statsbomb/open-data">StatsBomb Open Data</a> · Club crests remain the property of their respective owners.</span>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/d3-dsv@3/dist/d3-dsv.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script type="module" src="js/story.js?v=5"></script>
+  </body>
+</html>

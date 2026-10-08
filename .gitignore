@@ -1,0 +1,14 @@
+# Raw and intermediate data are large and reproducible with src/download_liga_f.py.
+# The dashboard's own lightweight CSVs live in app/data/ and ARE committed.
+/data/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Editors and OS
+.DS_Store
+.claude/
+.vscode/
+.idea/
